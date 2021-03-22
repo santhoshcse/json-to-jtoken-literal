@@ -37,19 +37,23 @@
             return string.Empty;
         }
 
-        private static void ConstructObject(JToken jObj, int level, bool isLast = false)
+        private static void ConstructObject(JToken jObj, int level, bool isLast = false, bool isNewLine = true)
         {
             if (jObj.Type == JTokenType.Object)
             {
-                Sb.Append("new JObject");
-                Sb.Append("\n{\n");
+                Indent(level, isNewLine);
+                Sb.Append("new JObject\n");
+                Indent(level);
+                Sb.Append("{\n");
                 foreach (JToken child in jObj.Children())
                 {
                     bool isLastChild = child.Next == null;
                     ConstructObject(child, level + 1, isLastChild);
                 }
 
-                Sb.Append("\n}");
+                Sb.Append("\n");
+                Indent(level);
+                Sb.Append("}");
                 if (!isLast)
                 {
                     Sb.Append(",\n");
@@ -57,8 +61,10 @@
             }
             else if (jObj.Type == JTokenType.Array)
             {
-                Sb.Append("new JArray");
-                Sb.Append("\n{\n");
+                Indent(level, isNewLine);
+                Sb.Append("new JArray\n");
+                Indent(level);
+                Sb.Append("{\n");
                 foreach (JToken child in jObj.Children())
                 {
                     bool isLastChild = child.Next == null;
@@ -69,7 +75,9 @@
                     }
                 }
 
-                Sb.Append("\n}");
+                Sb.Append("\n");
+                Indent(level);
+                Sb.Append("}");
                 if (!isLast)
                 {
                     Sb.Append(",\n");
@@ -77,12 +85,13 @@
             }
             else if (jObj.Type == JTokenType.Property)
             {
+                Indent(level);
                 Sb.Append("new JProperty(");
                 foreach (JToken child in jObj.Children())
                 {
                     Sb.Append(string.Format("\"{0}\"", GetPropertyName(child.Path)));
                     Sb.Append(", ");
-                    ConstructObject(child, level + 1, true);
+                    ConstructObject(child, level, true, false);
                 }
 
                 Sb.Append(")");
@@ -93,25 +102,31 @@
             }
             else if (jObj.Type == JTokenType.String)
             {
+                Indent(level, isNewLine);
                 var stringLiteral = string.Format("\"{0}\"", jObj.Value<string>());
                 Sb.Append(stringLiteral);
             }
             else if (jObj.Type == JTokenType.Integer)
             {
+                Indent(level, isNewLine);
                 Sb.Append(jObj.Value<int>());
             }
             else if (jObj.Type == JTokenType.Float)
             {
+                Indent(level, isNewLine);
                 Sb.Append(jObj.Value<float>());
             }
             else if (jObj.Type == JTokenType.Boolean)
             {
+                Indent(level, isNewLine);
+
                 // Adding `bool~` to the value to have proper boolean literal in the output
                 // Ex: To change False/True to false/true
                 Sb.Append("bool~" + jObj.Value<bool>());
             }
             else if (jObj.Type == JTokenType.Null)
             {
+                Indent(level, isNewLine);
                 var nullLiteral = "null";
                 Sb.Append(nullLiteral);
             }
@@ -150,6 +165,17 @@
             }
 
             return propertyName;
+        }
+
+        private static void Indent(int tabIndentCount, bool isNewLine = true)
+        {
+            if (isNewLine)
+            {
+                for (int i = 0; i < tabIndentCount; i++)
+                {
+                    Sb.Append("\t");
+                }
+            }
         }
     }
 }
