@@ -1,4 +1,4 @@
-﻿namespace JSON2ObjInitializer_BackEnd
+﻿namespace ConsoleApplication
 {
     using JSON_to_ObjectInitializer;
     using System;
