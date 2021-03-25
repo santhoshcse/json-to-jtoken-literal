@@ -1,6 +1,15 @@
 # json-to-object-initializer
 Converts JSON string into Object Initializer syntax with JSON.NET types in C#.
 
+## Usage:
+1. Can be used in Code Examples.
+2. Can be used in Test Data for Nunit Testing.
+
+## Type:
+1. Default Converter - Type will be infered from JSON properties.
+2. JToken Converter - Uses JToken types.
+3. Typed Converter - Type will be infered from datatype of the JSON values.
+
 ## Ex 1: C# - Simple Object
 
 ### Input:
