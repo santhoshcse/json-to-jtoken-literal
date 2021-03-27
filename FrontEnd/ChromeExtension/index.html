@@ -11,7 +11,7 @@
 <body>
     <div class="modal-header">
         <h1 class="logo">
-            <img src="/favicon.png" height="32px" width="32px" alt="JSON to Object Initializer" class="logo-icon">
+            <img src="./favicon.png" height="32px" width="32px" alt="JSON to Object Initializer" class="logo-icon">
             <h1>JSON to Object Initializer - C#</h1>
         </h1>
     </div>
@@ -35,7 +35,7 @@
                             <option value="Select" selected>Select</option>
                             <option value="Default">Default</option>
                             <option value="JToken">JToken</option>
-                            <option value="Typed">Typed</option>
+                            <!-- <option value="Typed">Typed</option> -->
                         </select>
                     </div>
                 </div>
@@ -59,8 +59,11 @@
             <div class="row">
                 <div class="col">
                     <label for="output">Object Initializer Format: </label>
+                    <img id="clipboard" src="./clipboard.png" height="16px" width="16px" alt="copy to clipboard" class="clipboard-icon" title="Copy to clipboard!">
+                    <span id="copy-status" style="color: green; display: none;">Copied!</span>
                     <br/>
-                    <code id="output"></code>
+                    <code id="output" style="white-space: pre-wrap;"></code>
+                    <!-- <div id="output" style="white-space: pre-wrap;"></div> -->
                 </div>
             </div>
         </div>

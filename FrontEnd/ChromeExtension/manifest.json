@@ -9,7 +9,7 @@
         "128": "icon-128x128.png"
     },
     "action": {
-        "default_icon": "favicon.ico",
+        "default_icon": "icon-128x128.png",
         "default_popup": "index.html",
         "default_title": "Converts JSON string to Object Initializer format."
     },

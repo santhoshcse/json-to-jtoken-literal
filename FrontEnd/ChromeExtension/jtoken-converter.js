@@ -1,20 +1,19 @@
-import { deserialize, getPropertyName, normalize, indent as indentUtil } from './util.js';
+import { deserialize, getPropertyName, indent as indentUtil } from './util.js';
 
-let arrayTypeIndex = 0;
 let stringBuilder = '';
 
-export default function objectInitializerUtil(jStr, rootName = 'Root') {
+export default function objectInitializerUtil(jStr) {
     stringBuilder = '';
     let jObj = deserialize(jStr);
-    constructObject(jObj, 0, rootName, true);
+    constructObject(jObj, 0, true);
     return stringBuilder;
 }
 
-function constructObject(jObj, level, propertyName, isLast = false, isNewLine = true, previousType = 'string') {
+function constructObject(jObj, level, isLast = false, isNewLine = true) {
     let objectType = typeof jObj;
     if (objectType == 'object' && jObj != null && !jObj.length) {
         indent(level, isNewLine);
-        stringBuilder += 'new ' + propertyName + '\n';
+        stringBuilder += 'new JObject\n';
         indent(level);
         stringBuilder += '{\n';
         let keys = Object.getOwnPropertyNames(jObj);
@@ -23,12 +22,13 @@ function constructObject(jObj, level, propertyName, isLast = false, isNewLine = 
 
             let childType = typeof child;
             indent(level + 1, true);
-            var normalizedPropertyName = normalize(getPropertyName(key));
-            stringBuilder += normalizedPropertyName;
-            stringBuilder += ' = ';
+            stringBuilder += 'new JProperty(';
+            stringBuilder += '"' + getPropertyName(key) + '"';
+            stringBuilder += ', ';
 
             let isLastChild = keys.length - 1 == index;
-            constructObject(child, level + 1, normalizedPropertyName, isLastChild, false);
+            constructObject(child, level + 1, isLastChild, false);
+            stringBuilder += ')';
 
             if (!isLastChild && (child == null || childType != 'object')) {
                 stringBuilder += ',\n';
@@ -43,18 +43,13 @@ function constructObject(jObj, level, propertyName, isLast = false, isNewLine = 
         }
     } else if (objectType == 'object' && jObj != null && jObj.length) {
         indent(level, isNewLine);
-        if (previousType == 'array') {
-            propertyName = propertyName + arrayTypeIndex;
-            arrayTypeIndex++;
-        }
-
-        stringBuilder += 'new List<' + propertyName + '>\n';
+        stringBuilder += 'new JArray\n';
         indent(level);
         stringBuilder += '{\n';
         jObj.forEach((child, index, _jObj) => {
             let childType = typeof child;
             let isLastChild = jObj.length - 1 == index;
-            constructObject(child, level + 1, propertyName, isLastChild, true, 'array');
+            constructObject(child, level + 1, isLastChild);
             if (!isLastChild && (childType != 'object')) {
                 stringBuilder += ',\n';
             }

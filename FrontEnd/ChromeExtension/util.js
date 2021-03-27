@@ -1,42 +1,32 @@
-export function serialize(inputObject)
-{
+export function serialize(inputObject) {
     var jsonString = JSON.stringify(inputObject);
     return jsonString;
 }
 
-export function deserialize(jsonString)
-{
+export function deserialize(jsonString) {
     var jsonObject = JSON.parse(jsonString);
     return jsonObject;
 }
 
-export function getPropertyName(propertyPath)
-{
+export function getPropertyName(propertyPath) {
     let propertyPathLength = propertyPath.length;
     let propertyName;
-    if (propertyPath.endsWith(']'))
-    {
-        if (propertyPath[propertyPathLength - 2] == '\'')
-        {
+    if (propertyPath.endsWith(']')) {
+        if (propertyPath[propertyPathLength - 2] == '\'') {
             // abcde['ab'] => 11-5-4
             let propertyKeyStartingIndex = propertyPath.lastIndexOf('[\'');
             propertyName = propertyPath.substr(propertyKeyStartingIndex + 2, propertyPathLength - propertyKeyStartingIndex - 4);
-        }
-        else
-        {
+        } else {
             // abcde["ab"] => 11-5-4
             // to be deleted: this case won't occur
             let propertyKeyStartingIndex = propertyPath.lastIndexOf('[\"');
             propertyName = propertyPath.substr(propertyKeyStartingIndex + 2, propertyPathLength - propertyKeyStartingIndex - 4);
         }
 
-        if (propertyName.includes('"'))
-        {
+        if (propertyName.includes('"')) {
             propertyName = propertyName.replace('\"', '\\\"');
         }
-    }
-    else
-    {
+    } else {
         // abcde.ab => 8-5-1
         let propertyKeyStartingIndex = propertyPath.lastIndexOf('.');
         propertyName = propertyPath.substr(propertyKeyStartingIndex + 1, propertyPathLength - propertyKeyStartingIndex - 1);
@@ -45,8 +35,7 @@ export function getPropertyName(propertyPath)
     return propertyName;
 }
 
-export function convertToPascalCase(value)
-{
+export function convertToPascalCase(value) {
     // value = value.toLowerCase().replace('_', ' ').replace('-', ' ');
     // let info = CultureInfo.CurrentCulture.TextInfo;
     // value = info.ToTitleCase(value).replace(' ', '');
@@ -70,30 +59,24 @@ export function normalize(value) {
 }
 
 export function isAlphaNumeric(chr, str, i) {
-    // let code, i, len;
-  
-    // for (i = 0, len = str.length; i < len; i++) {
-        let code = str.charCodeAt(i);
-        if (!(code > 47 && code < 58) && // numeric (0-9)
-            !(code > 64 && code < 91) && // upper alpha (A-Z)
-            !(code > 96 && code < 123) && // lower alpha (a-z)
-            (code != 32) && // space (32)
-            (code != 95) && // underscore (95)
-            (code != 45) // hypen (45)
-        ) {
-            return false;
-        }
-    // }
+    let code = str.charCodeAt(i);
+    if (!(code > 47 && code < 58) && // numeric (0-9)
+        !(code > 64 && code < 91) && // upper alpha (A-Z)
+        !(code > 96 && code < 123) && // lower alpha (a-z)
+        (code != 32) && // space (32)
+        (code != 95) && // underscore (95)
+        (code != 45) // hypen (45)
+    ) {
+        return false;
+    }
+
     return true;
 }
 
-export function indent(tabIndentCount, isNewLine = true)
-{
+export function indent(tabIndentCount, isNewLine = true) {
     let stringBuilder = '';
-    if (isNewLine)
-    {
-        for (let i = 0; i < tabIndentCount; i++)
-        {
+    if (isNewLine) {
+        for (let i = 0; i < tabIndentCount; i++) {
             stringBuilder += '\t';
         }
     }
