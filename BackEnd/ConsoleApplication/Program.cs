@@ -7,8 +7,9 @@
     {
         static void Main(string[] args)
         {
-            string jsonString1 = "{\"data\":[{\"key\":\"Audio\",\"it.e][\\\"ms\":[{\"key\":\"Bluetooth Headphones\",\"items\":null,\"count\":13482,\"summary\":[12099500.9899]}]}],\"totalCount\":1000000,\"summary\":[3638256074.5103]}";
-            string jsonString = "[[{\"key\":\"Bluetooth Headphones\",\"items\":null,\"count\":13482,\"summary\":[12099500.9899]}],[\"value\"]]";
+            string jsonString = "{\"data\":[{\"key\":\"Audio\",\"it.e][\\\"ms\":[{\"key\":\"Bluetooth Headphones\",\"items\":null,\"count\":13482,\"summary\":[12099500.9899]}]}],\"totalCount\":1000000,\"summary\":[3638256074.5103]}";
+            string jsonString2 = "[[{\"key\":\"Bluetooth Headphones\",\"items\":null,\"count\":13482,\"summary\":[12099500.9899]}],[\"value\"]]";
+            string jsonString1 = "{\"ABC\": [\"a\", \"b\"]}";
             var obj = JsonSerializerUtil.Deserialize(jsonString);
             Console.WriteLine("Enter conversion option (0: Default, 1: JToken): ");
             var convertOption = Console.ReadLine();

@@ -51,7 +51,7 @@
                     this.ConstructObject(child, level + 1, isLastChild);
                     if (child.Next != null && (child.Type != JTokenType.Object && child.Type != JTokenType.Array && child.Type != JTokenType.Property))
                     {
-                        this.Sb.Append(", ");
+                        this.Sb.Append(",\n");
                     }
                 }
 
