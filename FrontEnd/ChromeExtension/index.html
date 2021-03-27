@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to Object Initializer - C#</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="modal-header">
+        <h1 class="logo">
+            <img src="/favicon.ico" alt="JSON to Object Initializer" class="logo-icon">JSON to Object Initializer - C#
+        </h1>
+    </div>
+    <div class="modal-content">
+        <div class="container">
+            <div class="row" id="error">
+                <div class="col" id="error-text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="component-title">Root Object Name: </label>
+                        <input type="text" id="root-object-name" name="component-title" class="form-control">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="component-type">Converter Type: </label>
+                        <select name="component-type" id="converter-type" class="form-control">
+                            <option value="Select" selected>Select</option>
+                            <option value="Default">Default</option>
+                            <option value="JToken">JToken</option>
+                            <option value="Typed">Typed</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="html-content">JSON Content: </label>
+                        <textarea name="html-content" id="json-content" cols="70" rows="10" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="btn btn-success" id="generate-object-initializer">Create</div>
+                    <div class="btn btn-primary" id="reset">Reset</div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="output-block">
+            <div class="row">
+                <div class="col">
+                    <label for="output">Object Initializer Format: </label>
+                    <br/>
+                    <code id="output"></code>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
