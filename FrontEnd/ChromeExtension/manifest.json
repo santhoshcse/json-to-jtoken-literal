@@ -12,6 +12,5 @@
         "default_icon": "icon-128x128.png",
         "default_popup": "index.html",
         "default_title": "Converts JSON string to Object Initializer format."
-    },
-    "permissions": [ "activeTab" ]
+    }
 }
