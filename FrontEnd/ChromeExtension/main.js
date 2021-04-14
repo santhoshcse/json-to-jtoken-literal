@@ -9,7 +9,6 @@ import { default as jtokenConverter } from './jtoken-converter.js';
     let createObjectInitializerBtn = document.getElementById('generate-object-initializer');
     let resetBtn = document.getElementById('reset');
     let output = document.getElementById('output');
-    let outputBlock = document.getElementById('output-block');
     let errorText = document.getElementById('error-text');
     let errorBlock = document.getElementById('error');
 
@@ -20,7 +19,7 @@ import { default as jtokenConverter } from './jtoken-converter.js';
     const setOutput = (displayType, outputCode) => {
         output.innerText = outputCode;
         result = outputCode;
-        outputBlock.style.display = displayType;
+        output.style.display = displayType;
     }
 
     const setError = (displayType, message) => {
@@ -84,11 +83,10 @@ import { default as jtokenConverter } from './jtoken-converter.js';
     });
 
     resetBtn.addEventListener('click', function() {
-        setOutput('none', '');
+        setError('none', '');
     });
 
     const notifyCopySuccessStatus = () => {
-        // console.log('Copied to clipboard!');
         copyStatusElement.style.display = 'inline';
         copyStatusElement.style.color = 'green';
         copyStatusElement.innerText = 'Copied!';
@@ -99,8 +97,6 @@ import { default as jtokenConverter } from './jtoken-converter.js';
     }
 
     const notifyCopyFailureStatus = (error) => {
-        // console.error('Oops, unable to copy', error);
-        // console.error('Could not copy text: ', error);
         copyStatusElement.style.display = 'inline';
         copyStatusElement.style.color = 'red';
         copyStatusElement.innerText = 'Oops, unable to copy!';

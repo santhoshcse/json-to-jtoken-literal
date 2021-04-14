@@ -12,7 +12,7 @@
     <div class="modal-header">
         <h1 class="logo">
             <img src="./favicon.png" height="32px" width="32px" alt="JSON to Object Initializer" class="logo-icon">
-            <h1>JSON to Object Initializer - C#</h1>
+            <h1 class="header-title">JSON to Object Initializer - C#</h1>
         </h1>
     </div>
     <div class="modal-content">
@@ -24,14 +24,14 @@
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="component-title">Root Object Name: </label>
-                        <input type="text" id="root-object-name" name="component-title" class="form-control">
+                        <label for="root-object-name">Root Object Name: </label>
+                        <input type="text" id="root-object-name" name="root-object-name" class="form-control">
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="component-type">Converter Type: </label>
-                        <select name="component-type" id="converter-type" class="form-control">
+                        <label for="converter-type">Converter Type: </label>
+                        <select name="converter-type" id="converter-type" class="form-control">
                             <option value="Select" selected>Select</option>
                             <option value="Default">Default</option>
                             <option value="JToken">JToken</option>
@@ -43,8 +43,8 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <label for="html-content">JSON Content: </label>
-                        <textarea name="html-content" id="json-content" cols="70" rows="10" class="form-control"></textarea>
+                        <label for="json-content">JSON Content: </label>
+                        <textarea name="json-content" id="json-content" cols="70" rows="10" class="form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -55,15 +55,18 @@
                 </div>
             </div>
         </div>
-        <div class="container" id="output-block">
+        <div class="container output-container" id="output-block">
             <div class="row">
                 <div class="col">
                     <label for="output">Object Initializer Format: </label>
                     <img id="clipboard" src="./clipboard.png" height="16px" width="16px" alt="copy to clipboard" class="clipboard-icon" title="Copy to clipboard!">
-                    <span id="copy-status" style="color: green; display: none;">Copied!</span>
+                    <span id="copy-status">Copied!</span>
                     <br/>
-                    <code id="output" style="white-space: pre-wrap;"></code>
-                    <!-- <div id="output" style="white-space: pre-wrap;"></div> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <code id="output"></code>
                 </div>
             </div>
         </div>
